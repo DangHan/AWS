@@ -23,6 +23,12 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+    <div class="text-center mt-10">
+    <button onclick="getUser()" class="bg-blue-500 text-white px-6 py-3 rounded-lg">
+        Test Redis Cache
+    </button>
+    <p id="result" class="mt-4 text-lg font-bold text-green-600"></p>
+    </div>
 
     <!-- Navigation -->
     <nav class="bg-aws-dark text-white sticky top-0 z-50 shadow-md">
@@ -242,6 +248,17 @@
             tipBox.innerText = randomTip;
             tipBox.classList.remove('hidden');
         }
+
+        async function getUser() {
+    try {
+        const res = await fetch("http://98.91.224.28:3000/user");
+        const data = await res.json();
+
+        document.getElementById("result").innerText = data.user;
+    } catch (err) {
+        console.error(err);
+    }
+}
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
